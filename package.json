@@ -1,0 +1,26 @@
+{
+  "name": "api_restaurante",
+  "version": "1.0.0",
+  "description": "Creación de la api del restaurante de dllo web",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juandifs00/Ejem_api_Restaurante.git"
+  },
+  "author": "Juan Diego Rodríguez Guarín",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/juandifs00/Ejem_api_Restaurante/issues"
+  },
+  "homepage": "https://github.com/juandifs00/Ejem_api_Restaurante#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
