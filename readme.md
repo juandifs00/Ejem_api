@@ -18,6 +18,15 @@
 4. index.js: Inicio de API
 5. .gitignore: Ignorar la carpeta de archivos y/o carpetas del repositorio
 
+## Estructura que retorna los endpoints
+```json
+{
+    "ok":"bolean",
+    "message":"String",
+    "info":"Object"
+}
+´´´
+
 # Notas
 
 ## Comandos

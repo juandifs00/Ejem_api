@@ -1,3 +1,6 @@
+// Importar los servicios
+const req = require("../services/mongodb.services")
+
 // Controlador de usuarios
 
 /**
@@ -19,22 +22,36 @@ const modificarUsuario = (req, res) => {
     res.send("Modificar usuario")
 }
 
- /**
- * 
- * @param {Request} req 
- * @param {Response} res 
- */
-const consultarUsuario = (req, res) => {
-    res.send("Consultar usuario")
+/**
+* 
+* @param {Request} req 
+* @param {Response} res 
+*/
+const consultarUsuarios = (req, res) => {
+    let respuesta = {}
+    try {
+        respuesta.ok = true
+        respuesta.message = "Usuarios consultados correctamente"
+        // Consulta a la base de datos de usuarios
+        respuesta.info = [{ nombre: "Juan" }]
+        res.send(respuesta)
+    } catch (error) {
+        respuesta.ok = false
+        respuesta.message = "Ha ocurrido un error consultando los usuarios"
+        respuesta.info = error
+        res.status(500).send(respuesta)
+        run().catch(console.dir);
+    }
 }
 
- /**
- * 
- * @param {Request} req 
- * @param {Response} res 
- */
-const consultarUsuarios = (req, res) => {
-    res.send("Consultar usuarios")
+/**
+* 
+* @param {Request} req 
+* @param {Response} res 
+*/
+const consultarUsuario = (req, res) => {
+    let id = req.params.id
+    res.send("Consultar usuarios" + id)
 }
 
 /**
