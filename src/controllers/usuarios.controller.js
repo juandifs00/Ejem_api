@@ -1,5 +1,5 @@
 // Importar los servicios
-const { leerDocumentos, agregarDocumento } = require("../services/mongodb.services")
+const { leerDocumentos, agregarDocumento, modificarDocumento, eliminarColeccion } = require("../services/mongodb.services")
 
 // Controlador de usuarios
 
@@ -21,7 +21,6 @@ const crearUsuario = async (req, res) => {
         respuesta.info = resultado
         res.send(respuesta)
     } catch (error) {
-        console.log(error)
         respuesta.ok = false
         respuesta.message = "Ha ocurrido un error agregando el usuario"
         respuesta.info = error
@@ -34,8 +33,25 @@ const crearUsuario = async (req, res) => {
  * @param {Request} req 
  * @param {Response} res 
  */
-const modificarUsuario = (req, res) => {
-    res.send("Modificar usuario")
+const modificarUsuario = async (req, res) => {
+    let respuesta = {}
+    try {
+        let _id = req.params["id"]
+        respuesta.ok = true
+        respuesta.message = "Usuario modificado correctamente"
+        // Modoficar usuario en la base de datos
+        let informacion = req.body
+        let resultado = await modificarDocumento("usuarios", { _id }, informacion)
+        console.log(resultado);
+        respuesta.info = resultado
+        res.send(respuesta)
+    } catch (error) {
+        console.log(error);
+        respuesta.ok = false
+        respuesta.message = "Ha ocurrido un error modificando el usuario"
+        respuesta.info = error
+        res.status(500).send(respuesta)
+    }
 }
 
 /**
@@ -66,9 +82,22 @@ const consultarUsuarios = async (req, res) => {
 * @param {Request} req 
 * @param {Response} res 
 */
-const consultarUsuario = (req, res) => {
-    let id = req.params.id
-    res.send("Consultar usuarios" + id)
+const consultarUsuario = async (req, res) => {
+    let respuesta = {}
+    try {
+        respuesta.ok = true
+        respuesta.message = "Usuario consultado correctamente"
+        // Consulta a la base de datos de usuarios
+        let resultado = await leerDocumentos("usuarios")
+        console.log(resultado);
+        respuesta.info = resultado
+        res.send(respuesta)
+    } catch (error) {
+        respuesta.ok = false
+        respuesta.message = "Ha ocurrido un error consultando el usuario"
+        respuesta.info = error
+        res.status(500).send(respuesta)
+    }
 }
 
 /**
@@ -76,8 +105,24 @@ const consultarUsuario = (req, res) => {
  * @param {Request} req 
  * @param {Response} res 
  */
-const eliminarUsuario = (req, res) => {
-    res.send("Eliminar usuario")
+const eliminarUsuario = async (req, res) => {
+    let respuesta = {}
+    try {
+        let _id = req.body["id"]
+        respuesta.ok = true
+        respuesta.message = "Usuario eliminado correctamente"
+        // ELiminar usuario en la base de datos
+        let resultado = await eliminarColeccion("usuarios", { _id })
+        console.log(resultado);
+        respuesta.info = resultado
+        res.send(respuesta)
+    } catch (error) {
+        console.log(error);
+        respuesta.ok = false
+        respuesta.message = "Ha ocurrido un error eliminando el usuario"
+        respuesta.info = error
+        res.status(500).send(respuesta)
+    }
 }
 
 module.exports = {

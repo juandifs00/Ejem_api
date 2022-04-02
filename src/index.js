@@ -15,7 +15,7 @@ app.use(router)
 
 // Puerto donde se levanta el servidor WEB
 // Puerto donde esta escuchando la API
-const PORT = 3000
+const PORT = process.env.PORT
 
 // Levanta la API que estará esuchando en el puerto
 // 1. Primer parámetro: Puerto
